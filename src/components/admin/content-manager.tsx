@@ -2,6 +2,7 @@
 
 import { deleteContentRecord, saveContentRecord } from "@/app/admin/actions";
 import { MediaField } from "@/components/admin/media-field";
+import { SkillIconPicker } from "@/components/admin/skill-icon-picker";
 import type {
   AdminField,
   AdminManagedRecord,
@@ -119,7 +120,9 @@ export function ContentManager({
                 <div
                   key={field.name}
                   className={
-                    field.type === "textarea" || field.media
+                    field.type === "textarea" ||
+                    field.type === "skill-icon" ||
+                    field.media
                       ? "space-y-2 sm:col-span-2"
                       : "space-y-2"
                   }
@@ -144,7 +147,13 @@ export function ContentManager({
                         {field.label}
                         {field.required ? " *" : ""}
                       </label>
-                      {field.media ? (
+                      {field.type === "skill-icon" ? (
+                        <SkillIconPicker
+                          key={`${fieldId}-${editing === "new" ? "new" : editing.id}`}
+                          id={fieldId}
+                          initialValue={typeof value === "string" ? value : ""}
+                        />
+                      ) : field.media ? (
                         <MediaField
                           key={`${fieldId}-${editing === "new" ? "new" : editing.id}`}
                           name={field.name}

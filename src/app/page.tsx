@@ -16,6 +16,7 @@ import {
 import { getWhatsAppUrl } from "@/lib/contact";
 import { getSafeExternalUrl } from "@/lib/url";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
+import { findSkillIcon, SkillIcon } from "@/lib/skill-icons";
 import type { SkillCategory } from "@/types/database.types";
 import {
   ArrowRight,
@@ -272,13 +273,18 @@ export default async function Home() {
                   </div>
                   <div className="flex min-h-[4.5rem] flex-wrap content-start gap-2">
                     {categorySkills.map((skill) => {
-                      const skillImage = getSafeExternalUrl(skill.icon);
+                      const builtInIcon = findSkillIcon(skill.icon);
+                      const skillImage = builtInIcon
+                        ? null
+                        : getSafeExternalUrl(skill.icon);
                       return (
                         <span
                           key={skill.id}
                           className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/35 px-2.5 py-1.5 text-xs text-foreground"
                         >
-                          {skillImage ? (
+                          {builtInIcon ? (
+                            <SkillIcon value={skill.icon} />
+                          ) : skillImage ? (
                             <Image
                               src={skillImage}
                               alt=""

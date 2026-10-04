@@ -3,7 +3,14 @@ export type AdminResource = "projects" | "skills" | "services" | "social_links";
 export type AdminField = {
   name: string;
   label: string;
-  type: "text" | "url" | "textarea" | "number" | "checkbox" | "select";
+  type:
+    | "text"
+    | "url"
+    | "textarea"
+    | "number"
+    | "checkbox"
+    | "select"
+    | "skill-icon";
   media?: boolean;
   required?: boolean;
   options?: readonly string[];
@@ -67,10 +74,8 @@ export const adminResources: Record<
       },
       {
         name: "icon",
-        label: "Skill icon or image",
-        type: "text",
-        media: true,
-        hint: "Upload an image or paste its URL.",
+        label: "Skill Icon",
+        type: "skill-icon",
       },
       { name: "display_order", label: "Display order", type: "number", required: true },
     ],
