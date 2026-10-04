@@ -10,7 +10,8 @@ export type AdminField = {
     | "number"
     | "checkbox"
     | "select"
-    | "skill-icon";
+    | "skill-icon"
+    | "service-icon";
   media?: boolean;
   required?: boolean;
   options?: readonly string[];
@@ -88,10 +89,8 @@ export const adminResources: Record<
       { name: "description", label: "Description", type: "textarea" },
       {
         name: "icon",
-        label: "Service icon or image",
-        type: "text",
-        media: true,
-        hint: "Upload an image or paste its URL.",
+        label: "Service Icon",
+        type: "service-icon",
       },
       { name: "display_order", label: "Display order", type: "number", required: true },
     ],

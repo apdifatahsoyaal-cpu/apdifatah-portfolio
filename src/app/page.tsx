@@ -17,6 +17,7 @@ import { getWhatsAppUrl } from "@/lib/contact";
 import { getSafeExternalUrl } from "@/lib/url";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { findSkillIcon, SkillIcon } from "@/lib/skill-icons";
+import { findServiceIcon, ServiceIcon } from "@/lib/service-icons";
 import type { SkillCategory } from "@/types/database.types";
 import {
   ArrowRight,
@@ -341,7 +342,10 @@ export default async function Home() {
             ) : (
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {services.map((service, index) => {
-                const serviceImage = getSafeExternalUrl(service.icon);
+                const builtInServiceIcon = findServiceIcon(service.icon);
+                const serviceImage = builtInServiceIcon
+                  ? null
+                  : getSafeExternalUrl(service.icon);
                 const Icon = resolveServiceIcon(
                   serviceImage ? null : service.icon,
                 );
@@ -352,7 +356,9 @@ export default async function Home() {
                 >
                   <div className="mb-8 flex items-center justify-between">
                     <span className="flex size-11 items-center justify-center rounded-xl bg-muted text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                      {serviceImage ? (
+                      {builtInServiceIcon ? (
+                        <ServiceIcon value={service.icon} />
+                      ) : serviceImage ? (
                         <Image
                           src={serviceImage}
                           alt=""

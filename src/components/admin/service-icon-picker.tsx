@@ -1,9 +1,9 @@
 "use client";
 
 import { SearchableIconPicker } from "@/components/admin/searchable-icon-picker";
-import { skillIconOptions } from "@/lib/skill-icons";
+import { serviceIconOptions } from "@/lib/service-icons";
 
-export function SkillIconPicker({
+export function ServiceIconPicker({
   id,
   initialValue,
 }: {
@@ -14,8 +14,8 @@ export function SkillIconPicker({
     <SearchableIconPicker
       id={id}
       name="icon"
-      label="Skill icon"
-      options={skillIconOptions}
+      label="Service icon"
+      options={serviceIconOptions}
       initialValue={initialValue}
     />
   );

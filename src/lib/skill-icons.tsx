@@ -35,7 +35,7 @@ export type SkillIconId =
   | "mcp";
 
 export type SkillIconOption = {
-  id: SkillIconId;
+  id: string;
   label: string;
   render: (className?: string) => ReactNode;
 };
